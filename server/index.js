@@ -1,7 +1,9 @@
 
 const express = require('express')
-const { resolve } = require('path')
-const { isNullOrUndefined } = require('util')
+
+//Import PythonShell module.
+const {PythonShell} =require('python-shell');
+
 const app = express()
 const port = 3000
 
@@ -11,11 +13,41 @@ app.get('/', (req, res) => {
 
 
 app.get('/testApi', (req, res) => {
-  callPython("test.py", res, "");
+  let options = {
+    mode: 'text',
+    pythonOptions: ['-u'], // get print results in real-time
+      scriptPath: '', //If you are having python_test.py script in same folder, then it's optional.
+    args: [''] //An argument which can be accessed in the script using sys.argv[1]
+  };
+  
+  PythonShell.run('test.py', options, function (err, result){
+      if (err) throw err;
+      // result is an array consisting of messages collected 
+      //during execution of script.
+      console.log('result: ', result.toString());
+      res.send(result.toString())
+  });
+  
 })
 
 app.get('/testApi2', (req, res) => {
-  callPython("test2.py", res, "");
+
+//Here are the option object in which arguments can be passed for the python_test.js.
+let options = {
+  mode: 'text',
+  pythonOptions: ['-u'], // get print results in real-time
+    scriptPath: '', //If you are having python_test.py script in same folder, then it's optional.
+  args: [''] //An argument which can be accessed in the script using sys.argv[1]
+};
+
+PythonShell.run('test2.py', options, function (err, result){
+    if (err) throw err;
+    // result is an array consisting of messages collected 
+    //during execution of script.
+    console.log('result: ', result.toString());
+    res.send(result.toString())
+});
+
 })
 
 app.listen(port, () => {
