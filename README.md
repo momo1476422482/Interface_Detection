@@ -1,5 +1,7 @@
 # Interface_Detection
 
+Go sur le dossier server
+
 npm i                                -> pour réinstaller les modules ;
 
 si y a un problème sur express:     npm install express --save
