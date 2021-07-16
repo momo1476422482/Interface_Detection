@@ -1,0 +1,16 @@
+
+<p>
+File upload
+<form action="http://localhost:3000/testUploadFile" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <input type="submit"/>
+</form>
+</p>
+
+<p>
+    Multiple Files upload
+<form action="http://localhost:3000/testUploadFiles" method="post" enctype="multipart/form-data">
+    <input type="file" name="files" multiple/>
+    <input type="submit"/>
+</form>
+</p>

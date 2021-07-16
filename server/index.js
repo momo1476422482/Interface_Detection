@@ -3,6 +3,8 @@ const express = require('express')
 //Import PythonShell module.
 const {PythonShell} = require('python-shell');
 const fs = require('fs')
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 
 // Swagger for API (in construction)
@@ -33,6 +35,64 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
+})
+
+app.post('/testUploadFile', upload.single('file'), function(req,res,next)
+{
+  // req.file == file
+  var file = req.file;
+  if (file.size != 0)
+  {
+    try{
+      console.log(`Size : ${file.size}`);
+      console.log(`Filename : ${file.filename}`);
+      console.log(`Path : ${file.path}`);
+    }
+    catch(err)
+    {
+      console.error(err);
+    }
+    finally
+    {
+      // On supprime le fichier uploadé
+      fs.unlinkSync(file.path);
+    }
+
+  }
+
+  res.sendStatus(202);
+})
+
+app.post('/testUploadFiles', upload.array('files'), function (req, res, next) {
+  // req.files is array of files
+  // req.body will contain the text fields, if there were any
+// req.file == file
+var files = req.files;
+console.log("Nombres de fichier : " + files.length);
+
+files.forEach(file => {
+  if (file.size != 0)
+  {
+    try{
+      console.log(`Size : ${file.size}`);
+      console.log(`Filename : ${file.filename}`);
+      console.log(`Path : ${file.path}`);
+    }
+    catch(err)
+    {
+      console.error(err);
+    }
+    finally
+    {
+      // On supprime le fichier uploadé
+      fs.unlinkSync(file.path);
+    }
+  
+  }
+})
+
+res.sendStatus(202);
+
 })
 
 app.get('/testApi', (req, res) => {
