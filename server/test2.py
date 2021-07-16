@@ -1,9 +1,12 @@
-import time
-def dummy() :
-    out = ''
-    for i in range(0,10) :
-        out += str(i + 1) + ", "
-        #time.sleep(0.1)
-    print(out)
-if __name__ =='__main__' :
-    dummy = dummy()
+import numpy as np
+import cv2
+cap = cv2.VideoCapture('videotest.mp4')
+while(cap.isOpened()):
+  ret, frame = cap.read()
+  gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+  cv2.imshow('frame',gray)
+  if cv2.waitKey(1) & 0xFF == ord('q'):
+    break
+
+cap.release()
+cv2.destroyAllWindows
