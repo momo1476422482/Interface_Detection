@@ -41,7 +41,7 @@ export class DataService {
 
   detectMedia() {
     let formData: FormData = new FormData();
-    formData.append('uploadFile', this.file, this.file.name);
+    formData.append('file', this.file, this.file.name);
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
