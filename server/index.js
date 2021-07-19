@@ -47,6 +47,25 @@ app.post('/testUploadFile', upload.single('file'), function(req,res,next)
       console.log(`Size : ${file.size}`);
       console.log(`Filename : ${file.filename}`);
       console.log(`Path : ${file.path}`);
+
+      let options = {
+        mode: 'text',
+        pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: '', //If you are having python_test.py script in same folder, then it's optional.
+        args: [file.path] //An argument which can be accessed in the script using sys.argv[1]
+    };
+
+    PythonShell.run('testFile.py', options, function(err, result) {
+        if (err) throw err;
+        // result is an array consisting of messages collected 
+        //during execution of script.
+        if (result != null)
+        {
+          console.log('result: ', result.toString());
+          res.send(result.toString())
+        }        
+    });
+
     }
     catch(err)
     {
@@ -55,7 +74,7 @@ app.post('/testUploadFile', upload.single('file'), function(req,res,next)
     finally
     {
       // On supprime le fichier uploadé
-      fs.unlinkSync(file.path);
+     // fs.unlinkSync(file.path);
     }
 
   }
@@ -77,7 +96,25 @@ files.forEach(file => {
       console.log(`Size : ${file.size}`);
       console.log(`Filename : ${file.filename}`);
       console.log(`Path : ${file.path}`);
-    }
+
+      let options = {
+        mode: 'text',
+        pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: '', //If you are having python_test.py script in same folder, then it's optional.
+        args: [file.path] //An argument which can be accessed in the script using sys.argv[1]
+    };
+
+    PythonShell.run('testFile.py', options, function(err, result) {
+        if (err) throw err;
+        // result is an array consisting of messages collected 
+        //during execution of script.
+        if (result != null)
+        {
+          console.log('result: ', result.toString());
+          //res.send(result.toString())
+        }        
+    });
+  }
     catch(err)
     {
       console.error(err);
@@ -85,7 +122,7 @@ files.forEach(file => {
     finally
     {
       // On supprime le fichier uploadé
-      fs.unlinkSync(file.path);
+      //fs.unlinkSync(file.path);
     }
   
   }
