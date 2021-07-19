@@ -1,0 +1,14 @@
+.card {
+  width: 12rem;
+  height: 15rem;
+  background: linear-gradient(135deg, #2175d9, white);
+  color: #1b5dad;
+  font-size: 20px;
+
+  &.active {
+    font-weight: bold;
+    background: #2175d9 !important;
+    color: white !important;
+    text-align: center !important;
+  }
+}

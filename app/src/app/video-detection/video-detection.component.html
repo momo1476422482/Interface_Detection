@@ -1,0 +1,8 @@
+<div class="card" id="uploadvideo">
+  <p *ngIf="!videoSrc">"Video origine" à charger en cliquant sur "Upload Image or video" et <br>
+    à remplacer après avoir cliqué sur "Start Detection"</p>
+  <video *ngIf="videoSrc" [src]="videoSrc || ''" alt="Your video" controls></video> <br />
+</div>
+<div class="card" id="objectFocus">
+  <p>"Object Focus"</p>
+</div>

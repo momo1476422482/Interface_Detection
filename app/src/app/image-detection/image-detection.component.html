@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-9">
+    <div class="card" id="uploadImg">
+      <p *ngIf="!imageSrc">"Image origine" à charger en cliquant sur "Upload Image or video" et <br>
+        à remplacer après avoir cliqué sur "Start Detection"</p>
+      <img *ngIf="imageSrc" [src]="imageSrc" />
+    </div>
+    <div class="card" id="objectFocus">
+      <p>"Object Focus"</p>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card" id="annotationResults">
+      <div class="title">
+        Annotation Results
+      </div>
+      <div class="p-2 text-center w-100">
+        <div class="row w-100" *ngFor="let item of results">
+          <div class="col">{{item.category}}</div>
+          <div class="col">{{item.score}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

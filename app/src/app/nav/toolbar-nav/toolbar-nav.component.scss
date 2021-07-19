@@ -1,0 +1,29 @@
+.toolbar {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 20px;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  width: 100%;
+  padding: 0 2rem;
+  background-color: white;
+  color: #2175d9;
+  border-bottom: 2px groove;
+  border-bottom-color: #4e93e7;
+}
+
+.title {
+  font-size: 24px;
+  width: -webkit-fill-available;
+}
+
+#logo {
+  height: 2rem;
+}
