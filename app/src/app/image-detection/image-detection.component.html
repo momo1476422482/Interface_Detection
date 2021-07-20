@@ -6,7 +6,8 @@
       <img *ngIf="imageSrc" [src]="imageSrc" />
     </div>
     <div class="card" id="objectFocus">
-      <p>"Object Focus"</p>
+      <p *ngIf="dataService.isLoading">Loading</p>
+      <img *ngIf="!dataService.isLoading && resultSrc" [src]="resultSrc" />
     </div>
   </div>
   <div class="col-3">

@@ -12,6 +12,8 @@ const RESULTS_MOCK = Object.freeze([
   },
 ]);
 
+const API = 'http://localhost:3000';
+
 @Component({
   selector: 'app-image-detection',
   templateUrl: './image-detection.component.html',
@@ -19,11 +21,15 @@ const RESULTS_MOCK = Object.freeze([
 })
 export class ImageDetectionComponent {
   imageSrc: any;
+  resultSrc = '';
   results = RESULTS_MOCK;
 
-  constructor(private readonly dataService: DataService) {
+  constructor(public dataService: DataService) {
     this.dataService.media$.subscribe(
       ({ src, isVideo }) => (this.imageSrc = !isVideo && src)
+    );
+    this.dataService.result$.subscribe(
+      ({ path }) => (this.resultSrc = (path && `${API}/${path}`) || '')
     );
   }
 }
