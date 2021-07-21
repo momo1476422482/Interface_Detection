@@ -10,6 +10,7 @@ interface Media {
 
 interface Result {
   path: string;
+  result: string;
 }
 
 const API = 'http://localhost:3000';
@@ -44,6 +45,7 @@ export class DataService {
     // init result
     this.resultSubject = new BehaviorSubject<Result>({
       path: '',
+      result: '',
     });
     this.result$ = this.resultSubject.asObservable();
   }

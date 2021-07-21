@@ -45,6 +45,7 @@ app.post("/startDetection", upload.single("file"), (req, res) => {
         }
         res.status(200).send({
           path: `public/${file.filename}.jpg`,
+          result: (result && result[0]) || "{}",
         });
       }
     );
