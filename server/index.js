@@ -5,6 +5,7 @@ const { PythonShell } = require("python-shell");
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
+const path = require("path");
 
 // config
 const app = express();
@@ -21,6 +22,10 @@ app.use(
 
 app.get("/", (req, res) => {
   res.send("Interface Detection API works !");
+});
+
+app.get("/video-output.mp4", function (req, res) {
+  res.sendFile(path.join(__dirname, "output.mp4"));
 });
 
 app.post("/startDetection", upload.single("file"), (req, res) => {
@@ -50,7 +55,7 @@ app.post("/startDetection", upload.single("file"), (req, res) => {
           return;
         }
         res.status(200).send({
-          path: `public/${file.filename}${isVideo ? "" : ".jpg"}`,
+          path: isVideo ? "video-output.mp4" : `public/${file.filename}.jpg`,
           result: (result && result[0]) || "{}",
         });
       }
