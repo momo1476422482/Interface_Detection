@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 interface Media {
   src: string | ArrayBuffer | null;
@@ -34,10 +33,7 @@ export class DataService {
     return this.resultSubject.value;
   }
 
-  constructor(
-    private readonly router: Router,
-    private readonly http: HttpClient
-  ) {
+  constructor(private readonly http: HttpClient) {
     this.file = null;
     // init media
     this.mediaSubject = new BehaviorSubject<Media>({
@@ -62,25 +58,23 @@ export class DataService {
       return;
     }
     // prepare file for request
-    let formData: FormData = new FormData();
+    const formData: FormData = new FormData();
     formData.append('file', this.file, this.file.name);
-    let headers = new HttpHeaders();
+    const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
 
     // start analyzing
     this.isLoading = true;
-    this.http
-      .post(`${API}/startDetectionImage`, formData, { headers })
-      .subscribe(
-        (result: any) => {
-          this.resultSubject.next(result);
-          this.isLoading = false;
-        },
-        (error: any) => {
-          console.log(error);
-          this.isLoading = false;
-        }
-      );
+    this.http.post(`${API}/startDetection`, formData, { headers }).subscribe(
+      (result: any) => {
+        this.resultSubject.next(result);
+        this.isLoading = false;
+      },
+      (error: any) => {
+        console.log(error);
+        this.isLoading = false;
+      }
+    );
   }
 }
