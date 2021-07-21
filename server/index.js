@@ -25,6 +25,8 @@ app.get("/", (req, res) => {
 
 app.post("/startDetection", upload.single("file"), (req, res) => {
   var file = req.file;
+  var isVideo = req.query.isVideo === "true";
+
   if (file.size != 0) {
     let options = {
       mode: "text",
@@ -33,8 +35,12 @@ app.post("/startDetection", upload.single("file"), (req, res) => {
       args: [file.filename],
     };
 
+    const script = isVideo
+      ? "efficientdet_test_videos.py"
+      : "efficientdet_test.py";
+
     PythonShell.run(
-      "../../Yet-Another-EfficientDet-Pytorch/efficientdet_test.py",
+      `../../Yet-Another-EfficientDet-Pytorch/${script}`,
       options,
       function (err, result) {
         console.log("The script work has been finished");
@@ -44,7 +50,7 @@ app.post("/startDetection", upload.single("file"), (req, res) => {
           return;
         }
         res.status(200).send({
-          path: `public/${file.filename}.jpg`,
+          path: `public/${file.filename}${isVideo ? "" : ".jpg"}`,
           result: (result && result[0]) || "{}",
         });
       }

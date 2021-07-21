@@ -1,5 +1,7 @@
+import { Component } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { Component, OnInit } from '@angular/core';
+
+const API = 'http://localhost:3000';
 
 @Component({
   selector: 'app-video-detection',
@@ -8,10 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideoDetectionComponent {
   videoSrc: any;
+  resultSrc = '';
+  results: any;
 
-  constructor(private readonly dataService: DataService) {
+  constructor(public dataService: DataService) {
     this.dataService.media$.subscribe(
       ({ src, isVideo }) => (this.videoSrc = isVideo && src)
     );
+    this.dataService.result$.subscribe(({ path, result }) => {
+      this.resultSrc = (path && `${API}/${path}`) || '';
+      this.results = result && JSON.parse(result);
+    });
   }
 }

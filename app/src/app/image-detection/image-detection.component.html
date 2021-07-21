@@ -11,16 +11,6 @@
     </div>
   </div>
   <div class="col-3">
-    <div class="card" id="annotationResults">
-      <div class="title">
-        Annotation Results
-      </div>
-      <div class="p-2 text-center w-100">
-        <div class="row w-100" *ngFor="let obj of objects">
-          <div class="col">{{obj}}</div>
-          <div class="col">{{getObjectScore(obj)}}</div>
-        </div>
-      </div>
-    </div>
+    <app-scores [results]="results"></app-scores>
   </div>
 </div>

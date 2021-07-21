@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -53,6 +53,7 @@ export class DataService {
   loadMedia(file: any, media: any, isVideo: boolean) {
     this.file = file;
     this.mediaSubject.next({ src: media, isVideo });
+    this.resultSubject.next({ path: '', result: '' });
   }
 
   detectMedia() {
@@ -68,15 +69,19 @@ export class DataService {
 
     // start analyzing
     this.isLoading = true;
-    this.http.post(`${API}/startDetection`, formData, { headers }).subscribe(
-      (result: any) => {
-        this.resultSubject.next(result);
-        this.isLoading = false;
-      },
-      (error: any) => {
-        console.log(error);
-        this.isLoading = false;
-      }
-    );
+    this.http
+      .post(`${API}/startDetection?isVideo=${this.media.isVideo}`, formData, {
+        headers,
+      })
+      .subscribe(
+        (result: any) => {
+          this.resultSubject.next(result);
+          this.isLoading = false;
+        },
+        (error: any) => {
+          console.log(error);
+          this.isLoading = false;
+        }
+      );
   }
 }

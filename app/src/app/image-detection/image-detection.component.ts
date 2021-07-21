@@ -13,14 +13,6 @@ export class ImageDetectionComponent {
   resultSrc = '';
   results: any;
 
-  get objects() {
-    return Object.keys(this.results);
-  }
-
-  getObjectScore(obj: string) {
-    return Math.round(this.results[obj] * 100) / 100;
-  }
-
   constructor(public dataService: DataService) {
     this.dataService.media$.subscribe(
       ({ src, isVideo }) => (this.imageSrc = !isVideo && src)
