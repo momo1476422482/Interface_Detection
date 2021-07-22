@@ -24,10 +24,6 @@ app.get("/", (req, res) => {
   res.send("Interface Detection API works !");
 });
 
-app.get("/video-output.mp4", function (req, res) {
-  res.sendFile(path.join(__dirname, "output.mp4"));
-});
-
 app.post("/startDetection", upload.single("file"), (req, res) => {
   var file = req.file;
   var isVideo = req.query.isVideo === "true";
@@ -55,8 +51,8 @@ app.post("/startDetection", upload.single("file"), (req, res) => {
           return;
         }
         res.status(200).send({
-          path: isVideo ? "video-output.mp4" : `public/${file.filename}.jpg`,
-          result: (result && result[0]) || "{}",
+          path: `public/${file.filename}.${isVideo ? "mp4" : "jpg"}`,
+          result: (result && result[0]) || "[]",
         });
       }
     );

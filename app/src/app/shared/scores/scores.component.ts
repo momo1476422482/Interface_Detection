@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./scores.component.scss'],
 })
 export class ScoresComponent {
+  @Input() showResults = true;
   @Input() results: any;
 
   roundScore(score: any) {

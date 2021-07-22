@@ -2,7 +2,7 @@
   <div class="title">
     Annotation Results
   </div>
-  <div class="p-2 text-center w-100">
+  <div class="p-2 text-center w-100" *ngIf="showResults">
     <div class="row w-100" *ngFor="let item of results">
       <div class="col">{{item.obj}}</div>
       <div class="col">{{roundScore(item.score)}}</div>
