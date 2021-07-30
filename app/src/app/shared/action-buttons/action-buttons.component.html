@@ -1,10 +1,15 @@
 <div class="d-flex flex-row">
-  <button type="button" class="btn text-nowrap btn-primary" (click)="fileInput.click()">
-    <span>Upload Image or Video</span>
-    <input #fileInput type="file" (change)="loadMedia($event)" style="display:none;" />
+  <button type="button" class="btn text-nowrap btn-primary" (click)="imgInput.click()">
+    <span>Upload Image</span>
+    <input #imgInput type="file" (change)="loadImage($event)" style="display:none;" />
   </button>
-
+  <button type="button" class="btn text-nowrap btn-primary" (click)="videoInput.click()">
+    <span>Upload Video</span>
+    <input #videoInput type="file" (change)="loadVideo($event)" style="display:none;" />
+  </button>
   <button type="button" class="btn text-nowrap btn-primary" (click)="startDetection()">Start Detection</button>
+</div>
+<div class="d-flex flex-row pt-3">
   <button type="button" class="btn text-nowrap btn-success">Save Detection</button>
   <button type="button" class="btn text-nowrap btn-success">Save Annotation</button>
   <button type="button" class="btn text-nowrap btn-success">Update Annotation</button>

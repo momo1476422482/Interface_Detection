@@ -1,19 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-interface Media {
-  src: string | ArrayBuffer | null;
-  isVideo: boolean;
-}
-
-interface Result {
-  path: string;
-  result: string;
-}
-
-const API = 'http://localhost:3000';
+import { Media, Result, API } from '../app.models';
 
 @Injectable({
   providedIn: 'root',

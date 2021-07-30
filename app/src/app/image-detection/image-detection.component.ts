@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
-
-const API = 'http://localhost:3000';
+import { API } from '../app.models';
 
 @Component({
   selector: 'app-image-detection',
