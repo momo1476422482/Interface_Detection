@@ -6,7 +6,7 @@ import { Media, Result, API } from '../app.models';
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
+export class MediaService {
   public isLoading = false;
   private file: any;
   // media to be analyzed

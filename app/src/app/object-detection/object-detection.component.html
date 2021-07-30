@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col">
+    <app-action-buttons></app-action-buttons>
+  </div>
+</div>
+
+<div class="row pt-4">
+  <div class="col-5">
+    <div class="card" id="uploadMedia">
+      <p *ngIf="!mediaSrc">Media à charger en cliquant sur les boutons "Upload" et à analyser après avoir cliqué sur
+        "Start Detection"</p>
+      <img *ngIf="!isVideo && mediaSrc" [src]="mediaSrc" />
+      <video *ngIf="isVideo && mediaSrc" [src]="mediaSrc || ''" controls></video>
+    </div>
+  </div>
+  <div class="col-5">
+    <div class="card" id="objectFocus">
+      <p *ngIf="dataService.isLoading">Loading</p>
+      <img *ngIf="!dataService.isLoading && !isVideo && resultSrc" [src]="resultSrc" />
+      <video *ngIf="!dataService.isLoading && isVideo && resultSrc" [src]="resultSrc"></video>
+    </div>
+  </div>
+  <div class="col-2">
+    <app-scores [results]="results" [showResults]="!!mediaSrc"></app-scores>
+  </div>
+</div>

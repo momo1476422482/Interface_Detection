@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
+import { MediaService } from 'src/app/services/media.service';
 
 @Component({
   selector: 'app-action-buttons',
@@ -8,10 +7,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./action-buttons.component.scss'],
 })
 export class ActionButtonsComponent {
-  constructor(
-    private readonly router: Router,
-    private readonly dataService: DataService
-  ) {}
+  constructor(private readonly dataService: MediaService) {}
 
   loadImage(event: any) {
     if (event?.target?.files && event?.target?.files[0]) {
@@ -36,12 +32,6 @@ export class ActionButtonsComponent {
     reader.onload = (e) =>
       this.dataService.loadMedia(file, reader.result, isVideo);
     reader.readAsDataURL(file);
-
-    if (isVideo) {
-      this.router.navigate(['video']);
-    } else {
-      this.router.navigate(['image']);
-    }
   }
 
   startDetection() {

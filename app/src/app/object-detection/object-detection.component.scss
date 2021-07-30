@@ -1,7 +1,8 @@
-#uploadImg,
+#uploadMedia,
 #objectFocus {
   min-height: 30rem;
-  img {
+  img,
+  video {
     width: 100%;
   }
 }
