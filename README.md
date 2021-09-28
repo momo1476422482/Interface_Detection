@@ -8,7 +8,7 @@ Pour démarrer l'application :
 2) Télécharger le code de l'algo de détection (Efficientdet) d'après https://github.com/zylo117/Yet-Another-EfficientDet-Pytorch.git
     et puis installer python 3.6 et toutes les librairies nécessaires demandés dans requirement.txt
     !!! Il faut faire l'attention à l'installation de torch : il faut utiliser ligne de commande suivante:
-     pip install torch==1.9.1+cu102 torchvision==0.10.1+cu102 torchaudio===0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
+pip install torch==1.9.1+cu102 torchvision==0.10.1+cu102 torchaudio===0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
      !!!
      
      
